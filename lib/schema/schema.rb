@@ -1,4 +1,9 @@
 module Schema
+  # transform
+  # @param object The object to be transformed.
+  # @param schema A valid schema. For hashes only hashes and for arrays only arrays are valid schemas.
+  #   For everything else either a type (e.g. <tt>Float</tt>)
+  #   or an Array with a single type element (e.g. <tt>[String]</tt>) is a valid Schema.
   def self.transform object, schema
     case schema
     when Array
