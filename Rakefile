@@ -3,15 +3,17 @@ require 'rake'
 
 begin
   require 'jeweler'
+  require './lib/schema/version'
   Jeweler::Tasks.new do |gem|
     gem.name = "schema"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Schemas for hashes}
+    gem.description = %Q{Deep type conversion through schemas for hashes}
     gem.email = "danishkirel@gmail.com"
     gem.homepage = "http://github.com/kirel/schema"
     gem.authors = ["Daniel Kirsch"]
-    gem.add_development_dependency "rspec", ">= 1.2.9"
+    gem.add_development_dependency "rspec", "~> 2.2"
     gem.add_development_dependency "yard", ">= 0"
+    gem.version = Schema::VERSION    
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -19,20 +21,11 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
-require 'spec/rake/spectask'
-Spec::Rake::SpecTask.new(:spec) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.spec_files = FileList['spec/**/*_spec.rb']
-end
+require 'rspec/core/rake_task'
 
-Spec::Rake::SpecTask.new(:rcov) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.pattern = 'spec/**/*_spec.rb'
-  spec.rcov = true
-end
+RSpec::Core::RakeTask.new(:spec)
 
 task :spec => :check_dependencies
-
 task :default => :spec
 
 begin

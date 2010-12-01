@@ -1,8 +1,13 @@
-= schema
+# Schema
 
-Description goes here.
+Schema is a mechanism for enforcing schemas for ruby hashes. Type conversions are specified in a schema-hash and applied to a hash that shall be transformed.
 
-== Note on Patches/Pull Requests
+### SYNOPSIS
+
+    Schema.transform({:float => '42', :array_of_strings => 23}, {:float => Float, :array_of_strings => [String]})
+    # => {:float => 42.0, :array_of_strings => ['23']}
+
+### Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
