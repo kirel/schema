@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{schema}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Daniel Kirsch"]
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "lib/schema/include.rb",
     "lib/schema/schema.rb",
     "lib/schema/version.rb",
+    "schema.gemspec",
     "spec/schema_spec.rb",
     "spec/spec_helper.rb"
   ]
