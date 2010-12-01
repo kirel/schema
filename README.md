@@ -6,6 +6,15 @@ Schema is a mechanism for enforcing schemas for ruby hashes. Type conversions ar
 
     Schema.transform({:float => '42', :array_of_strings => 23}, {:float => Float, :array_of_strings => [String]})
     # => {:float => 42.0, :array_of_strings => ['23']}
+    
+### Schemas
+
+A Schema is either a type that implements `#from` or a hash of schemas or an array with a schema as it's singgle element.
+
+    Float # is a schema
+    [Float] # is a schema
+    { :string => String } # is a schema
+    { :foo => [{ :bar => DateTime }]} # is a schema
 
 ### Note on Patches/Pull Requests
  
@@ -17,6 +26,6 @@ Schema is a mechanism for enforcing schemas for ruby hashes. Type conversions ar
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-== Copyright
+### Copyright
 
 Copyright (c) 2010 Daniel Kirsch. See LICENSE for details.
