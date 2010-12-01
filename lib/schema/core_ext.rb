@@ -26,6 +26,11 @@ end
 
 class DateTime
   def self.from val
-    parse val
+    case val
+    when DateTime
+      val
+    else
+      parse val.to_s
+    end
   end
 end

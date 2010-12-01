@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-Object.send :include, Schema::Include
+Schema.include!
 
 describe "Schema" do
 
@@ -14,6 +14,8 @@ describe "Schema" do
   end
   
   it "should cast dates" do
+    dt = DateTime.now
+    dt.transform(DateTime).should == dt
     '2010-12-01T12:00:00+01:00'.transform(DateTime).should == DateTime.parse('2010-12-01T12:00:00+01:00')
     '2010-12-01'.transform(Date).should == Date.parse('2010-12-01')
   end

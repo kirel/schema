@@ -26,4 +26,8 @@ module Schema
       schema.from(object)
     end
   end  
+  
+  def self.include!
+    Object.send :include, Schema::Include
+  end
 end
