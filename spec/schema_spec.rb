@@ -13,6 +13,11 @@ describe "Schema" do
     '42'.transform(Integer).should be_kind_of(Integer)
   end
   
+  it "should cast dates" do
+    '2010-12-01T12:00:00+01:00'.transform(DateTime).should == DateTime.parse('2010-12-01T12:00:00+01:00')
+    '2010-12-01'.transform(Date).should == Date.parse('2010-12-01')
+  end
+  
   it "should cast hashes of simple types" do
     {:string => 'string'}.transform({:string => String}).should == {:string => 'string'}
     {:float => '42'}.transform({:float => Float}).should == {:float => 42.0}
