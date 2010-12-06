@@ -9,12 +9,26 @@ Schema is a mechanism for enforcing schemas for ruby hashes. Type conversions ar
     
 ### Schemas
 
-A Schema is either a type that implements `#from` or a hash of schemas or an array with a schema as it's singgle element.
+A Schema is either a type that implements `#from` or a hash of schemas or an array with a schema as it's single element.
 
     Float # is a schema
     [Float] # is a schema
     { :string => String } # is a schema
     { :foo => [{ :bar => DateTime }]} # is a schema
+
+In Hash-schemas keys may be optional indicated by a trailing question mark.
+
+    { :optional => '42' }.transform({ :optional? => Float }) == { :optional => 42.0 }
+    {}.transform({ :optional? => Float }) == {}
+
+This also enables circular schemas (for eg. trees)
+
+    schema = { :value => Float }
+    schema.update { :children? => [schema] }
+
+### Issues
+
+- Works only for symbol keys. Not yet sure if this is a bug or a feature...
 
 ### Note on Patches/Pull Requests
  

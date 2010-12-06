@@ -48,6 +48,35 @@ describe "Schema" do
       { :nested => [{ :hash => 42 }] }    
   end
   
+  ### optional keys in schemas
+  
+  it "should allow optional keys in schemas" do
+    schema = { :optional? => Float }
+    { :optional => '42' }.transform(schema).should == { :optional => 42.0 }
+    {}.transform(schema).should == {}
+  end
+
+  it "should cast circular schemas" do
+    schema = { :float => Float }
+    schema.update :circular? => schema # circular schemas _MUST_ be optional
+    
+    { :float => '42', :circular => { :float => '17' } }.transform(schema).should ==
+      { :float => 42.0, :circular => { :float => 17.0 } }
+  end
+
+  it "should cast circular schemas with arrays" do
+    schema = { :float => Float }
+    schema.update :circular? => [schema] # circular schemas _MUST_ be optional
+    
+    { :float => '42', :circular => { :float => '17' } }.transform(schema).should ==
+      { :float => 42.0, :circular => [{ :float => 17.0 }] }
+
+    { :float => '42', :circular => [{ :float => '17' }, { :float => '23' }] }.transform(schema).should ==
+      { :float => 42.0, :circular => [{ :float => 17.0 }, { :float => 23.0 }] }
+  end
+  
+  ### how to cope with non-present keys
+  
   it "should erase keys not present in the schema" do
     {:not => 'present'}.transform({}).should == {}
   end

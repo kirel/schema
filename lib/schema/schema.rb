@@ -20,7 +20,12 @@ module Schema
     when Hash
       raise ArgumentError, "A #{schema.class} is no valid schema for a #{object.class}." unless object.is_a?(Hash)
       schema.inject({}) do |h, (key, subschema)|
-        h.update(key => object[key].transform(subschema))
+        if key.to_s =~ /^(.*)\?$/
+          optionalkey = $1.to_sym
+          h.update(object[optionalkey] ? { optionalkey => object[optionalkey].transform(subschema) } : {})
+        else
+          h.update(key => object[key].transform(subschema))
+        end
       end
     else
       schema.from(object)
