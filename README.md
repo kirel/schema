@@ -16,6 +16,10 @@ A Schema is either a type that implements `#from` or a hash of schemas or an arr
     { :string => String } # is a schema
     { :foo => [{ :bar => DateTime }]} # is a schema
 
+Ruby has no Boolean class, therefore we define it, so we have
+
+    Boolean # is a schema
+
 In Hash-schemas keys may be optional indicated by a trailing question mark.
 
     { :optional => '42' }.transform({ :optional? => Float }) == { :optional => 42.0 }
