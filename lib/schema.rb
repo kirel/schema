@@ -1,4 +1,5 @@
 require 'schema/version'
 require 'schema/schema'
+require 'schema/boolean'
 require 'schema/core_ext'
 require 'schema/include'

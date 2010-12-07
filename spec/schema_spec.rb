@@ -11,6 +11,10 @@ describe "Schema" do
     '42'.transform(Float).should be_kind_of(Float)
     '42'.transform(Integer).should == 42
     '42'.transform(Integer).should be_kind_of(Integer)
+    'true'.transform(Boolean).should == true
+    'true'.transform(Boolean).should be_kind_of(TrueClass)
+    'false'.transform(Boolean).should == false
+    'false'.transform(Boolean).should be_kind_of(FalseClass)
   end
   
   it "should cast dates" do
