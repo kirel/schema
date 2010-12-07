@@ -27,6 +27,8 @@ module Schema
           h.update(key => object[key].transform(subschema))
         end
       end
+    when nil
+      nil
     else
       schema.from(object)
     end

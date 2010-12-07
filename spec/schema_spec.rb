@@ -4,6 +4,11 @@ Schema.include!
 
 describe "Schema" do
 
+  it "should cast nil" do
+    42.transform(nil).should == nil
+    "string".transform(nil).should == nil
+  end
+
   it "should cast simple types" do
     42.transform(String).should == '42'
     42.transform(String).should be_kind_of(String)

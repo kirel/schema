@@ -6,7 +6,14 @@ Schema is a mechanism for enforcing schemas for ruby hashes. Type conversions ar
 
     Schema.transform({:float => '42', :array_of_strings => 23}, {:float => Float, :array_of_strings => [String]})
     # => {:float => 42.0, :array_of_strings => ['23']}
+
+or
+
+    Schema.include!
     
+    {:float => '42', :array_of_strings => 23}.transform({:float => Float, :array_of_strings => [String]})
+    # => {:float => 42.0, :array_of_strings => ['23']}
+
 ### Schemas
 
 A Schema is either a type that implements `#from` or a hash of schemas or an array with a schema as it's single element.
@@ -16,9 +23,13 @@ A Schema is either a type that implements `#from` or a hash of schemas or an arr
     { :string => String } # is a schema
     { :foo => [{ :bar => DateTime }]} # is a schema
 
-Ruby has no Boolean class, therefore we define it, so we have
+Ruby has no Boolean class, therefore we define it, so we have:
 
-    Boolean # is a schema
+    "true".transform(Boolean) == true
+
+nil is also a valid schema but it transforms everything to nil:
+
+    "string".transform(nil) == nil
 
 In Hash-schemas keys may be optional indicated by a trailing question mark.
 
