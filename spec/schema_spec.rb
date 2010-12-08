@@ -73,15 +73,26 @@ describe "Schema" do
       { :float => 42.0, :circular => { :float => 17.0 } }
   end
 
-  it "should cast circular schemas with arrays" do
+  it "should cast circular schemas with optional arrays" do
     schema = { :float => Float }
-    schema.update :circular? => [schema] # circular schemas _MUST_ be optional
+    schema.update :circular? => [schema]
     
     { :float => '42', :circular => { :float => '17' } }.transform(schema).should ==
       { :float => 42.0, :circular => [{ :float => 17.0 }] }
 
     { :float => '42', :circular => [{ :float => '17' }, { :float => '23' }] }.transform(schema).should ==
       { :float => 42.0, :circular => [{ :float => 17.0 }, { :float => 23.0 }] }
+  end
+
+  it "should cast circular schemas with non optional arrays" do
+    schema = { :float => Float }
+    schema.update :circular => [schema]
+    
+    { :float => '42', :circular => { :float => '17' } }.transform(schema).should ==
+      { :float => 42.0, :circular => [{ :float => 17.0, :circular => [] }] }
+
+    { :float => '42', :circular => [{ :float => '17' }, { :float => '23' }] }.transform(schema).should ==
+      { :float => 42.0, :circular => [{ :float => 17.0, :circular => [] }, { :float => 23.0, :circular => [] }] }
   end
   
   ### how to cope with non-present keys
