@@ -1,4 +1,4 @@
-module Boolean
+class Boolean
   def self.from val
     case val.to_s
     when /^true$/i
