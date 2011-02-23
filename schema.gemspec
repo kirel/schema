@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{schema}
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Daniel Kirsch"]
-  s.date = %q{2011-02-22}
+  s.date = %q{2011-02-23}
   s.description = %q{Deep type conversion through schemas for hashes}
   s.email = %q{danishkirel@gmail.com}
   s.extra_rdoc_files = [
