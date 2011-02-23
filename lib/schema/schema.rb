@@ -22,7 +22,7 @@ module Schema
       schema.inject({}) do |h, (key, subschema)|
         if key.to_s =~ /^(.*)\?$/
           optionalkey = $1.to_sym
-          h.update(object[optionalkey] ? { optionalkey => object[optionalkey].transform(subschema) } : {})
+          h.update(object.key?(optionalkey) || object[optionalkey] ? { optionalkey => object[optionalkey].transform(subschema) } : {})
         else
           h.update(key => object[key].transform(subschema))
         end

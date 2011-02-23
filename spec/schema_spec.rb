@@ -57,6 +57,11 @@ describe "Schema" do
       { :nested => [{ :hash => 42 }] }    
   end
   
+  it "should preserve nil values" do
+  { :probably_nil => nil }.transform({ :probably_nil? => nil }).should ==
+    { :probably_nil => nil }    
+  end
+  
   ### optional keys in schemas
   
   it "should allow optional keys in schemas" do
